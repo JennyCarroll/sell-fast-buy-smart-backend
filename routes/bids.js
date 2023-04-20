@@ -18,7 +18,7 @@ erouter.get("/:userId", (req, res) => {
       console.log(bidsForUser)
       let returnObj = {};
       returnObj.bidsForUser = bidsForUser;
-      return bidsdb.getHighestBids()
+      return bidsdb.getHighestBids(userId)
       .then(highestBids => {
       returnObj.highestBids = highestBids
       res.send(returnObj);
