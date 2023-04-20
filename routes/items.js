@@ -25,6 +25,15 @@ erouter.get("/:id", (req, res) => {
   });
 });
 
+//POST /items/:id/edit
+erouter.post('/:id/edit', (req, res) => {
+  console.log('edit req.body', req.body);
+  itemsdb.editItem(req.body)
+    .then((itemInfo) => {
+      console.log(itemInfo);
+    });
+});
+
 // POST /items/new - Create new item and accompanying bid and image.
 erouter.post("/new", (req, res) => {
   let newItem = {};
