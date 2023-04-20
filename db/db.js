@@ -4,6 +4,8 @@ require("dotenv").config();
 // PG database client/connection setup
 const { Pool } = require("pg");
 
+let fs = require("fs");
+
 //took the original connection string and added on the root certificate DB_CA_CERT environment variable that in on Digital Ocean
 // const conString = process.env.DB_STRING + "&sslrootcert=../ca-certificate.crt";
 
@@ -17,6 +19,13 @@ const dbParams = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   //set ssl to true for Digital Ocean
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
+  ssl: {
+    //i added cert below
+    ca_cert: fs.readFileSync("db/ca-certificate.crt").toString(),
+  },
   // ssl: true,
   // user: 'labber',
   // password: 'labber'
