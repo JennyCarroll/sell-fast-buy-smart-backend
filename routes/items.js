@@ -48,7 +48,6 @@ erouter.post("/new", (req, res) => {
       imagesdb.createImage(imageInfo);
     })
     .then(() => {
-      console.log(newItem);
       res.send(newItem);
     });
 });

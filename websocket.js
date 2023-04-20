@@ -29,18 +29,3 @@ function startWebSocket(server) {
 };
 
 module.exports = { startWebSocket, socketBidNotify };
-
-
-
-
-
-
-
-// socket.broadcast.emit('login', { number, numbers });
-    // console.log('someone connected');
-    // const number = Math.random() * 10;
-    // socket.user = number;
-    // numbers.push(number);
-
-    // socket.emit('NUMBERS', { number, numbers });
-    // socket.broadcast.emit('NEW_NUMBERS', { number, numbers });
