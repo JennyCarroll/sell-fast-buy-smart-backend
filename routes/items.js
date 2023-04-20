@@ -27,10 +27,8 @@ erouter.get("/:id", (req, res) => {
 
 //POST /items/:id/edit
 erouter.post('/:id/edit', (req, res) => {
-  console.log('edit req.body', req.body);
   itemsdb.editItem(req.body)
     .then((itemInfo) => {
-      console.log(itemInfo);
     });
 });
 
