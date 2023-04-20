@@ -4,8 +4,15 @@ require("dotenv").config();
 // PG database client/connection setup
 const { Pool } = require("pg");
 
+//took the original connection string and added on the root certificate DB_CA_CERT environment variable that in on Digital Ocean
+const conString =
+  process.env.DB_STRING + "&sslrootcert=" + process.env.DB_CA_CERT;
+
 const dbParams = {
-  connectionString: process.env.DB_STRING,
+  //this connects us directly to the Digital Ocean db
+
+  connectionString: conString,
+
   // host: process.env.DB_HOST,
   // port: process.env.DB_PORT,
   // user: process.env.DB_USER,
