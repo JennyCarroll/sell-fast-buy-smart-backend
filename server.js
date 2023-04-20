@@ -32,6 +32,7 @@ const imageRoutes = require("./routes/images");
 const categoryRoutes = require("./routes/categories");
 const conditionRoutes = require("./routes/conditions");
 const bidRoutes = require("./routes/bids");
+const reviewRoutes = require("./routes/ratings")
 
 //Endpoints:
 app.use("/items", itemRoutes);
@@ -40,6 +41,7 @@ app.use("/images", imageRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/conditions", conditionRoutes);
 app.use("/bids", bidRoutes);
+app.use("/reviews", reviewRoutes);
 
 // PORT LISTEN
 server.listen(port, () => {
