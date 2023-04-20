@@ -7,8 +7,8 @@ const { socketBidNotify } = require('../websocket');
 
 // GET /bids   - Gets all bids
 erouter.get("/", (req, res) => {
-  bidsdb.getBids().then((categories) => {
-    res.send(categories);
+  bidsdb.getBids().then((bids) => {
+    res.send(bids);
   });
 });
 // GET /bidss/:userId   - Gets all bids for user
@@ -35,6 +35,7 @@ erouter.post("/new", (req, res) => {
       returnObj.user = user[0];
       console.log('returnObj', returnObj);
       socketBidNotify(returnObj);
+      res.send(returnObj.bid)
     });
 }
 );
