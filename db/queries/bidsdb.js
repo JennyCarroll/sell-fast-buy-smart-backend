@@ -19,13 +19,23 @@ const getBidsForUser = (userId) => {
     .query(`SELECT DISTINCT ON (bids.item_id) bids.*, item_images.img_url FROM bids JOIN item_images ON bids.item_id = item_images.item_id WHERE bids.user_id = ${userId}
   AND bids.id NOT IN (SELECT MIN(id) FROM bids GROUP BY item_id)`)
     .then(bids => {
-      console.log("%%%", bids.rows);
       return bids.rows;
     })
     .catch(function (xhr, status, error) {
       console.log("Error: " + error);
     });
 };
+
+const getHighestBids = () => {
+ return db
+  .query(`SELECT item_id, MAX(bid_value) AS highest_bid FROM bids GROUP BY item_id;`)
+  .then(highestBids => { 
+    return highestBids.rows;
+  })
+  .catch(function (xhr, status, error) {
+    console.log("Error: " + error);
+  });
+}
 
 
 const createBid = (bidInfo) => {
@@ -48,5 +58,6 @@ const createBid = (bidInfo) => {
 module.exports = {
   getBids,
   getBidsForUser,
-  createBid
+  createBid,
+  getHighestBids
 };

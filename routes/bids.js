@@ -15,9 +15,16 @@ erouter.get("/", (req, res) => {
 erouter.get("/:userId", (req, res) => {
   let userId = req.query.id;
   bidsdb.getBidsForUser(userId).then((bidsForUser) => {
-    res.send(bidsForUser);
+      console.log(bidsForUser)
+      let returnObj = {};
+      returnObj.bidsForUser = bidsForUser;
+      return bidsdb.getHighestBids()
+      .then(highestBids => {
+      returnObj.highestBids = highestBids
+      res.send(returnObj);
+      })
+    });
   });
-});
 
 // POST /bids/new - Create new bid
 erouter.post("/new", (req, res) => {
