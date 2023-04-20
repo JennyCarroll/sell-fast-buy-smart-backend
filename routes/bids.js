@@ -33,6 +33,7 @@ erouter.post("/new", (req, res) => {
     })
     .then((user) => {
       returnObj.user = user[0];
+      console.log('returnObj', returnObj);
       socketBidNotify(returnObj);
     });
 }
