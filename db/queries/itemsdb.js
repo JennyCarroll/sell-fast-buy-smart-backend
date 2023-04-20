@@ -10,7 +10,7 @@ const getAllItems = () => {
       return items.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:1 " + error);
+      console.log("Error - getAllItems " + error);
     });
 };
 
@@ -42,7 +42,7 @@ const getItemDetails = (id) => {
       );
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:2 " + error);
+      console.log("Error - getItemDetails " + error);
     });
 };
 
@@ -67,7 +67,7 @@ const createItem = (item) => {
       return itemInfo.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:3 " + error);
+      console.log("Error - createItem " + error);
     });
 };
 
@@ -107,7 +107,7 @@ const getItemsEndingSoon = () => {
       return items.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:4 " + error);
+      console.log("Error - getItemsEndingSoon " + error);
       console.log(xhr);
       console.log(status);
     });
@@ -123,7 +123,20 @@ const getItem = (id) => {
       return item.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:4 " + error);
+      console.log("Error - getItem " + error);
+      console.log(xhr);
+      console.log(status);
+    });
+};
+
+// deleteItem - Returns a single item with username 
+const deleteItem = (id) => {
+  return db
+    .query(`DELETE FROM items 
+    WHERE id = ${id};`)
+    .then(dbRes => { return dbRes; })
+    .catch(function (xhr, status, error) {
+      console.log("Error - deleteItem" + error);
       console.log(xhr);
       console.log(status);
     });
@@ -135,6 +148,7 @@ module.exports = {
   getAllItems,
   getItemDetails,
   createItem,
+  deleteItem,
   editItem,
   getItemsEndingSoon
 };
