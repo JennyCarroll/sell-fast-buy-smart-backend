@@ -14,17 +14,6 @@ const getAllItems = () => {
     });
 };
 
-// .query(
-//   `SELECT items.*,
-//   (SELECT ARRAY_AGG(img_url)
-//   FROM item_images
-//   WHERE item_id = ${id}) AS images,
-// bids.*
-// FROM items
-// JOIN bids ON items.id = bids.item_id
-// WHERE items.id = ${id};`
-// )
-
 // getItem - Get object of one Item
 const getItemDetails = (id) => {
   return db
@@ -82,6 +71,36 @@ const createItem = (item) => {
     });
 };
 
+// editItem
+const editItem = (item) => {
+  const query = {
+    text: `UPDATE items
+    SET category_id = $1, title = $2, description = $3, condition = $4, end_date = $5
+    WHERE id = $6
+    RETURNING *;`,
+    values: [
+      item.category,
+      item.title,
+      item.description,
+      item.condition,
+      item.endDate,
+      item.id
+    ]
+  };
+
+  return db
+    .query(query)
+    .then((itemInfo) => {
+      return itemInfo.rows;
+    })
+    .catch(function (xhr, status, error) {
+      console.log("Error:3 " + error);
+    });
+};
+
+
+
+
 // getItemsEndingSoon 
 const getItemsEndingSoon = () => {
   return db
@@ -118,5 +137,6 @@ module.exports = {
   getAllItems,
   getItemDetails,
   createItem,
+  editItem,
   getItemsEndingSoon
 };
