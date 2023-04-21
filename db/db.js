@@ -23,7 +23,7 @@ const dbParams = {
   //   rejectUnauthorized: false,
   // },
   ssl: {
-    ca: fs.readFileSync("./ca-certificate.crt").toString(),
+    ca_cert: fs.readFileSync("./ca-certificate.crt").toString(),
   },
   // ssl: true,
   // user: 'labber',
