@@ -24,7 +24,7 @@ const dbParams = {
   // },
   ssl: {
     //i added cert below
-    ca_cert: fs.readFileSync("ca-certificate.crt").toString(),
+    ca_cert: fs.readFileSync("db/ca-certificate.crt").toString(),
   },
   // ssl: true,
   // user: 'labber',
