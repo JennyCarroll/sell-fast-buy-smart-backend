@@ -29,6 +29,16 @@ erouter.get("/:id", (req, res) => {
 erouter.post('/:id/edit', (req, res) => {
   itemsdb.editItem(req.body)
     .then((itemInfo) => {
+      res.send(itemInfo);
+    });
+});
+
+//POST /items/:id/delete
+erouter.post('/:id/delete', (req, res) => {
+  itemsdb.deleteItem(req.body.itemId)
+    .then((dbRes) => {
+      console.log('items Router', dbRes);
+      res.send({ 'status': true });
     });
 });
 
