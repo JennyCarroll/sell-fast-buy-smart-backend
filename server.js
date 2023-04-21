@@ -35,7 +35,6 @@ const bidRoutes = require("./routes/bids");
 
 //Endpoints:
 app.use("/items", itemRoutes);
-// app.use("/items/:id", itemRoutes);
 app.use("/users", userRoutes);
 app.use("/images", imageRoutes);
 app.use("/categories", categoryRoutes);
