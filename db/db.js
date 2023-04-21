@@ -17,6 +17,12 @@ const dbParams = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   //set ssl to true for Digital Ocean
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
+  ssl: {
+    ca: fs.readFileSync("./ca-certificate.crt").toString(),
+  },
   // ssl: true,
   // user: 'labber',
   // password: 'labber'
