@@ -15,13 +15,13 @@ const getFirstImage = () => {
 };
 
 const createImage = (imageInfo) => {
-  const query = {
+  const queryObj = {
     text: `INSERT INTO item_images ( item_id, img_url ) 
       VALUES ($1, $2) RETURNING *;`,
     values: [imageInfo.item_id, imageInfo.img_url],
   };
   return db
-    .query(query)
+    .query(queryObj)
     .then((imageInfo) => {
       return imageInfo.rows;
     })

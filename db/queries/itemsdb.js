@@ -10,7 +10,7 @@ const getAllItems = () => {
       return items.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:1 " + error);
+      console.log("Error - getAllItems " + error);
     });
 };
 
@@ -42,13 +42,13 @@ const getItemDetails = (id) => {
       );
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:2 " + error);
+      console.log("Error - getItemDetails " + error);
     });
 };
 
 // createItem - Creates new item
 const createItem = (item) => {
-  const query = {
+  const queryObj = {
     text: `INSERT INTO items (user_id, category_id, title, description, condition, end_date) 
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
     values: [
@@ -62,18 +62,18 @@ const createItem = (item) => {
   };
 
   return db
-    .query(query)
+    .query(queryObj)
     .then((itemInfo) => {
       return itemInfo.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:3 " + error);
+      console.log("Error - createItem " + error);
     });
 };
 
 // editItem
 const editItem = (item) => {
-  const query = {
+  const queryObj = {
     text: `UPDATE items
     SET category_id = $1, title = $2, description = $3, condition = $4, end_date = $5
     WHERE id = $6
@@ -89,16 +89,14 @@ const editItem = (item) => {
   };
 
   return db
-    .query(query)
+    .query(queryObj)
     .then((itemInfo) => {
       return itemInfo.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:3 " + error);
+      console.log("Error! db query failed");
     });
 };
-
-
 
 
 // getItemsEndingSoon 
@@ -109,7 +107,7 @@ const getItemsEndingSoon = () => {
       return items.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:4 " + error);
+      console.log("Error - getItemsEndingSoon " + error);
       console.log(xhr);
       console.log(status);
     });
@@ -125,7 +123,20 @@ const getItem = (id) => {
       return item.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:4 " + error);
+      console.log("Error - getItem " + error);
+      console.log(xhr);
+      console.log(status);
+    });
+};
+
+// deleteItem - Returns a single item with username 
+const deleteItem = (id) => {
+  return db
+    .query(`DELETE FROM items 
+    WHERE id = ${id};`)
+    .then(dbRes => { return dbRes; })
+    .catch(function (xhr, status, error) {
+      console.log("Error - deleteItem" + error);
       console.log(xhr);
       console.log(status);
     });
@@ -137,6 +148,7 @@ module.exports = {
   getAllItems,
   getItemDetails,
   createItem,
+  deleteItem,
   editItem,
   getItemsEndingSoon
 };
