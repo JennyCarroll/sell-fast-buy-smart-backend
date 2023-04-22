@@ -2,16 +2,20 @@ const db = require("../db");
 
 // getItems - Get object of all Items
 const getAllItems = () => {
-  return db
-    // .query(`SELECT * FROM items;`)
-    // .query(`SELECT items.*, bids.bid_value FROM items JOIN bids on items.id = bids.item_id ORDER BY bids.bid_value DESC;`)
-    .query(`SELECT items.*, MAX(bids.bid_value) AS highest_bid FROM items JOIN bids ON items.id = bids.item_id GROUP BY items.id;`)
-    .then((items) => {
-      return items.rows;
-    })
-    .catch(function (xhr, status, error) {
-      console.log("Error - getAllItems " + error);
-    });
+  return (
+    db
+      // .query(`SELECT * FROM items;`)
+      // .query(`SELECT items.*, bids.bid_value FROM items JOIN bids on items.id = bids.item_id ORDER BY bids.bid_value DESC;`)
+      .query(
+        `SELECT items.*, MAX(bids.bid_value) AS highest_bid FROM items JOIN bids ON items.id = bids.item_id GROUP BY items.id;`
+      )
+      .then((items) => {
+        return items.rows;
+      })
+      .catch(function (xhr, status, error) {
+        console.log("Error - getAllItems " + error);
+      })
+  );
 };
 
 // getItem - Get object of one Item
@@ -84,8 +88,8 @@ const editItem = (item) => {
       item.description,
       item.condition,
       item.endDate,
-      item.id
-    ]
+      item.id,
+    ],
   };
 
   return db
@@ -98,11 +102,12 @@ const editItem = (item) => {
     });
 };
 
-
-// getItemsEndingSoon 
+// getItemsEndingSoon
 const getItemsEndingSoon = () => {
   return db
-    .query("SELECT * FROM items WHERE end_date >= NOW() ORDER BY end_date ASC LIMIT 10;")
+    .query(
+      "SELECT * FROM items WHERE end_date >= NOW() ORDER BY end_date ASC LIMIT 10;"
+    )
     .then((items) => {
       return items.rows;
     })
@@ -113,12 +118,14 @@ const getItemsEndingSoon = () => {
     });
 };
 
-// getItem - Returns a single item with username 
+// getItem - Returns a single item with username
 const getItem = (id) => {
   return db
-    .query(`SELECT items.* 
+    .query(
+      `SELECT items.* 
     FROM items 
-    WHERE items.id = ${id};`)
+    WHERE items.id = ${id};`
+    )
     .then((item) => {
       return item.rows;
     })
@@ -129,19 +136,22 @@ const getItem = (id) => {
     });
 };
 
-// deleteItem - Returns a single item with username 
+// deleteItem - Returns a single item with username
 const deleteItem = (id) => {
   return db
-    .query(`DELETE FROM items 
-    WHERE id = ${id};`)
-    .then(dbRes => { return dbRes; })
+    .query(
+      `DELETE FROM items 
+    WHERE id = ${id};`
+    )
+    .then((dbRes) => {
+      return dbRes;
+    })
     .catch(function (xhr, status, error) {
       console.log("Error - deleteItem" + error);
       console.log(xhr);
       console.log(status);
     });
 };
-
 
 module.exports = {
   getItem,
@@ -150,5 +160,5 @@ module.exports = {
   createItem,
   deleteItem,
   editItem,
-  getItemsEndingSoon
+  getItemsEndingSoon,
 };
