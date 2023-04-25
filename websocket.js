@@ -7,7 +7,11 @@ const socketBidNotify = (bid) => {
 };
 
 function startWebSocket(server) {
-  const io = socketio(server);
+  const io = socketio(server, {
+    cors: {
+      origin: 'https://starfish-app-bhxro.ondigitalocean.app/'
+    }
+  });
   ioInstance = io;
 
   // SOCKET LISTENER
