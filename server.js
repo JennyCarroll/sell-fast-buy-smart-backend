@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 // Converts data package to json if applicable
 app.use(express.json());
-// Prevents cors errors
+// Prevents cors errors - This gives permission to the client url to make requests.
 const corsOptions = {
   origin: 'https://starfish-app-bhxro.ondigitalocean.app'
 };

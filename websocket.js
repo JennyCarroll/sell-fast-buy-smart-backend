@@ -8,9 +8,9 @@ const socketBidNotify = (bid) => {
 
 function startWebSocket(server) {
   const io = socketio(server, {
-    cors: {
-      origin: 'https://starfish-app-bhxro.ondigitalocean.app'
-    }
+    // cors: {
+    //   origin: 'https://starfish-app-bhxro.ondigitalocean.app' //Allow this client url to access server.
+    // }
   });
   ioInstance = io;
 
