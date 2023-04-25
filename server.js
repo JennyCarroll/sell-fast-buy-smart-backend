@@ -20,7 +20,10 @@ app.use(express.urlencoded({ extended: false }));
 // Converts data package to json if applicable
 app.use(express.json());
 // Prevents cors errors
-app.use(cors());
+const corsOptions = {
+  origin: 'https://starfish-app-bhxro.ondigitalocean.app'
+};
+app.use(cors(corsOptions));
 // loads static if applicable. Currently routed to build
 app.use(express.static("../client/build"));
 
@@ -32,7 +35,7 @@ const imageRoutes = require("./routes/images");
 const categoryRoutes = require("./routes/categories");
 const conditionRoutes = require("./routes/conditions");
 const bidRoutes = require("./routes/bids");
-const reviewRoutes = require("./routes/ratings")
+const reviewRoutes = require("./routes/ratings");
 
 //Endpoints:
 app.use("/items", itemRoutes);
