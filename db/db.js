@@ -6,9 +6,6 @@ const { Pool } = require("pg");
 
 let fs = require("fs");
 
-//took the original connection string and added on the root certificate DB_CA_CERT environment variable that in on Digital Ocean
-// const conString = process.env.DB_STRING + "&sslrootcert=../ca-certificate.crt";
-
 const dbParams = {
   // //this connects us directly to the Digital Ocean db
   // connectionString:
