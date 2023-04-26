@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 // Prevents cors errors - This gives permission to the client url to make requests.
 const corsOptions = {
-  origin: 'https://starfish-app-bhxro.ondigitalocean.app'
+  origin: ['https://starfish-app-bhxro.ondigitalocean.app', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002']
 };
 app.use(cors(corsOptions));
 // loads static if applicable. Currently routed to build
