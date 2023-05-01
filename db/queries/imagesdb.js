@@ -9,8 +9,8 @@ const getFirstImage = () => {
     .then((images) => {
       return images.rows;
     })
-    .catch(function (xhr, status, error) {
-      console.log("Error: " + error);
+    .catch(function () {
+      console.log("Error retrieving images");
     });
 };
 
@@ -25,8 +25,8 @@ const createImage = (imageInfo) => {
     .then((imageInfo) => {
       return imageInfo.rows;
     })
-    .catch(function (xhr, status, error) {
-      console.log("Error: " + error);
+    .catch(function () {
+      console.log("Error retrieving images");
     });
 };
 module.exports = {

@@ -1,5 +1,5 @@
 const socketio = require('socket.io');
-let ioInstance = null;  // Used to reference the io instance outside of the startWebSocket function
+let ioInstance = null;
 
 
 const socketBidNotify = (bid) => {
@@ -8,9 +8,9 @@ const socketBidNotify = (bid) => {
 
 function startWebSocket(server) {
   const io = socketio(server, {
+    //Allow this client url to access server.
     cors: {
       origin: ['https://starfish-app-bhxro.ondigitalocean.app', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002']
-      //Allow this client url to access server.
     }
   });
   ioInstance = io;
@@ -26,7 +26,6 @@ function startWebSocket(server) {
 
     socket.on('disconnect', () => {
       discMessage = socket.userId ? `${socket.userId} has left the building` : `Unreg user has left`;
-      console.log(discMessage);
     });
   });
 

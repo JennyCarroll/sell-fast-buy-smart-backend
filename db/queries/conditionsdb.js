@@ -6,8 +6,8 @@ const getConditions = () => {
     .then(conditions => {
       return conditions.rows;
     })
-    .catch(function (xhr, status, error) {
-      console.log("Error: " + error);
+    .catch(function () {
+      console.log("Error retrieving conditions");
     });
 };
 

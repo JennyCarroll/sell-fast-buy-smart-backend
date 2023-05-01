@@ -1,10 +1,7 @@
-// load .env data into process.env
 require("dotenv").config();
-
-// PG database client/connection setup
-const { Pool } = require("pg");
-
 let fs = require("fs");
+
+const { Pool } = require("pg");
 
 const dbParams = {
   // //this connects us directly to the Digital Ocean db

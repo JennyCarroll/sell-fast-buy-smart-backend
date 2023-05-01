@@ -4,8 +4,6 @@ const db = require("../db");
 const getAllItems = () => {
   return (
     db
-      // .query(`SELECT * FROM items;`)
-      // .query(`SELECT items.*, bids.bid_value FROM items JOIN bids on items.id = bids.item_id ORDER BY bids.bid_value DESC;`)
       .query(
         `SELECT items.*, MAX(bids.bid_value) AS highest_bid FROM items JOIN bids ON items.id = bids.item_id GROUP BY items.id;`
       )
@@ -30,7 +28,7 @@ const getItemDetails = (id) => {
   ORDER BY bids.bid_value DESC;`
     )
     .then((itemInfo) => {
-      // I am making a second db query within our .then to obtain all the images for certain item
+      // Second db query within to obtain all the images for certain item
       return (
         db
           .query(
@@ -38,7 +36,7 @@ const getItemDetails = (id) => {
         FROM item_images
         WHERE item_id = ${id};`
           )
-          // then I add another .then that creates an img_url key in the object at itemInfo.rows[0] and sets it to the result of the second db query for images
+          // Creates an img_url key in the object at itemInfo.rows[0] and sets it to the result of the second db query for images
           .then((images) => {
             itemInfo.rows[0].img_url = images.rows;
             return itemInfo.rows;
@@ -98,7 +96,7 @@ const editItem = (item) => {
       return itemInfo.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error! db query failed");
+      console.log("Error - editItem " + error);
     });
 };
 
@@ -113,8 +111,6 @@ const getItemsEndingSoon = () => {
     })
     .catch(function (xhr, status, error) {
       console.log("Error - getItemsEndingSoon " + error);
-      console.log(xhr);
-      console.log(status);
     });
 };
 
@@ -131,8 +127,6 @@ const getItem = (id) => {
     })
     .catch(function (xhr, status, error) {
       console.log("Error - getItem " + error);
-      console.log(xhr);
-      console.log(status);
     });
 };
 
@@ -147,9 +141,7 @@ const deleteItem = (id) => {
       return dbRes;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error - deleteItem" + error);
-      console.log(xhr);
-      console.log(status);
+      console.log("Error - deleteItem " + error);
     });
 };
 

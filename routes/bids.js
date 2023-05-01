@@ -11,20 +11,19 @@ erouter.get("/", (req, res) => {
     res.send(bids);
   });
 });
-// GET /bidss/:userId   - Gets all bids for user
+// GET /bids/:userId   - Gets all bids for user
 erouter.get("/:userId", (req, res) => {
   let userId = req.query.id;
   bidsdb.getBidsForUser(userId).then((bidsForUser) => {
-      console.log(bidsForUser)
-      let returnObj = {};
-      returnObj.bidsForUser = bidsForUser;
-      return bidsdb.getHighestBids(userId)
+    let returnObj = {};
+    returnObj.bidsForUser = bidsForUser;
+    return bidsdb.getHighestBids(userId)
       .then(highestBids => {
-      returnObj.highestBids = highestBids
-      res.send(returnObj);
-      })
-    });
+        returnObj.highestBids = highestBids;
+        res.send(returnObj);
+      });
   });
+});
 
 // POST /bids/new - Create new bid
 erouter.post("/new", (req, res) => {

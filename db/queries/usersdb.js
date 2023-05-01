@@ -1,6 +1,6 @@
 const db = require("../db");
 
-// getItems - Get object of all Items
+// getAllUsers - Get object of all users
 const getAllUsers = () => {
   return db
     .query(
@@ -10,11 +10,11 @@ const getAllUsers = () => {
       return users.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error: " + error);
+      console.log("Error - getAllUsers " + error);
     });
 };
 
-// getItem - Returns a single item with username 
+// getUser - Returns a single user 
 const getUser = (id) => {
   return db
     .query(`SELECT * 
@@ -24,9 +24,7 @@ const getUser = (id) => {
       return user.rows;
     })
     .catch(function (xhr, status, error) {
-      console.log("Error:4 " + error);
-      console.log(xhr);
-      console.log(status);
+      console.log("Error - getUser " + error);
     });
 };
 
