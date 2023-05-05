@@ -17,11 +17,9 @@ const dbParams = {
     rejectUnauthorized: false,
   },
   // ssl: {
-  //   //i added cert below
   //   ca_cert: fs.readFileSync("db/ca-certificate.crt").toString(),
   // },
   // ssl: true,
-  // //I also added this
   // sslValidate: false,
   // user: 'labber',
   // password: 'labber'
