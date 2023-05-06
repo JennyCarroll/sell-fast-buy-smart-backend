@@ -11,7 +11,7 @@ const getCategories = () => {
     });
 };
 
-const getItemsInCategory = (categoryId) => {
+const getItemsByCategory = (categoryId) => {
   return db
     .query(`SELECT items.*, item_images.img_url FROM items
   JOIN (SELECT DISTINCT ON (item_id) id, item_id, img_url FROM item_images ORDER BY item_id, id) 
@@ -27,5 +27,5 @@ const getItemsInCategory = (categoryId) => {
 
 module.exports = {
   getCategories,
-  getItemsInCategory
+  getItemsByCategory: getItemsByCategory
 };

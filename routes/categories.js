@@ -11,7 +11,7 @@ erouter.get("/", (req, res) => {
 // GET /categories/:categoryId   - Gets all items for category
 erouter.get("/:categoryId", (req, res) => {
   let categoryId = req.query.id
-  categoriesdb.getItemsInCategory(categoryId).then((itemsInCategory) => {
+  categoriesdb.getItemsByCategory(categoryId).then((itemsInCategory) => {
     res.send(itemsInCategory);
   });
 });
