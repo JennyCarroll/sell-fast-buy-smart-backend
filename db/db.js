@@ -10,9 +10,10 @@ const dbParams = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   //ssl for Digital Ocean
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
+  ssl: false,
 };
 
 const db = new Pool(dbParams);
